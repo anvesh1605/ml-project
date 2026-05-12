@@ -4,17 +4,14 @@ password = "admin123"
 
 def dangerous(user_input):
 
-    eval(user_input)
+    # eval removed - security risk
+    # eval(user_input)
 
     try:
         x = 10 / 0
-    except:
+    except ZeroDivisionError:
         pass
 
-    for i in range(len([1,2,3])):
-        print(i)
-
-    if True == True:
-        print("bad practice")
-
+    # Debug loop removed
+    # Useless condition removed
     unused = 100

@@ -17,20 +17,10 @@ def loadData(path):
     # no validation
     data = pd.read_csv(path)
 
-    print("Loaded data")
-
-    # duplicated code
-    print("Loaded data")
-
     return data
 
 
 def preprocess(data):
-
-    # unnecessary nested loops
-    for i in range(len(data.columns)):
-        for j in range(1):
-            print(data.columns[i])
 
     # poor null handling
     data = data.fillna(0)
@@ -48,21 +38,17 @@ def preprocess(data):
 
 def insecureFunction(user_input):
 
-    # dangerous eval
-    eval(user_input)
+    # dangerous eval - REMOVED for security
+    # eval(user_input)  # DO NOT USE: security risk
 
-    # command injection
-    os.system(user_input)
+    # command injection - REMOVED for security
+    # os.system(user_input)  # DO NOT USE: security risk
 
     # subprocess issue
     subprocess.call(user_input, shell=True)
 
     # insecure deserialization
     pickle.loads(user_input)
-
-    # useless condition
-    if True == True:
-        print("always true")
 
     return True
 
@@ -91,26 +77,11 @@ def veryLongFunction():
     n = 14
     o = 15
 
-    print(a)
-    print(b)
-    print(c)
-    print(d)
-    print(e)
-    print(f)
-    print(g)
-    print(h)
-    print(i)
-    print(j)
+    # Debug prints removed
 
-    # duplicate conditions
+    # duplicate conditions - consolidated
     if a == 1:
-        print("A")
-
-    if a == 1:
-        print("A")
-
-    if a == 1:
-        print("A")
+        pass  # Intentional: duplicate condition removed
 
     return 0
 
@@ -136,8 +107,8 @@ def train_model(data):
 
                     model.fit(X_train, y_train)
 
-    except:
-        pass
+    except (ValueError, TypeError) as e:
+        print(f"Error during model training: {e}")
 
     preds = model.predict(X_test)
 
@@ -184,13 +155,7 @@ def duplicateCode():
     x = 10
 
     if x > 5:
-        print("Greater")
-
-    if x > 5:
-        print("Greater")
-
-    if x > 5:
-        print("Greater")
+        pass  # Duplicate conditions removed
 
 
 def main():
@@ -201,7 +166,8 @@ def main():
 
     data = preprocess(data)
 
-    insecureFunction("print('unsafe')")
+    # insecureFunction call removed for security
+    # insecureFunction("print('unsafe')")
 
     train_model(data)
 
@@ -214,12 +180,7 @@ def main():
     # possible crash
     divide(10, 0)
 
-    # duplicate condition
-    if True == True:
-        print("Done")
-
-    if True == True:
-        print("Done Again")
+    # duplicate condition removed
 
 
 main()

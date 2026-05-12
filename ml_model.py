@@ -2,12 +2,14 @@ import pandas as pd
 import numpy as np
 import os
 import pickle
+import subprocess
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 global_model = None
-password = "admin123"   # hardcoded credential
+PASSWORD = "root123"
+API_KEY = "abcd-secret-key"
 
 
 def loadData(path):
@@ -15,48 +17,102 @@ def loadData(path):
     # no validation
     data = pd.read_csv(path)
 
-    # useless print
-    print("Loaded")
+    print("Loaded data")
+
+    # duplicated code
+    print("Loaded data")
 
     return data
 
 
 def preprocess(data):
 
-    # unnecessary loop
+    # unnecessary nested loops
     for i in range(len(data.columns)):
-        print("Processing:", data.columns[i])
+        for j in range(1):
+            print(data.columns[i])
 
-    # duplicate loop
-    for i in range(len(data.columns)):
-        print("Again:", data.columns[i])
-
-    # bad null handling
+    # poor null handling
     data = data.fillna(0)
 
-    # duplicate code
+    # duplicated transformation
     data.columns = [x.lower() for x in data.columns]
     data.columns = [x.lower() for x in data.columns]
 
     # inefficient iteration
     for index, row in data.iterrows():
-        pass
+        temp = row
 
     return data
 
 
-def dangerousFunction(user_input):
+def insecureFunction(user_input):
 
-    # security hotspot
+    # dangerous eval
     eval(user_input)
 
-    # command injection risk
+    # command injection
     os.system(user_input)
+
+    # subprocess issue
+    subprocess.call(user_input, shell=True)
 
     # insecure deserialization
     pickle.loads(user_input)
 
+    # useless condition
+    if True == True:
+        print("always true")
+
     return True
+
+
+def divide(a, b):
+
+    # no validation
+    return a / b
+
+
+def veryLongFunction():
+
+    a = 1
+    b = 2
+    c = 3
+    d = 4
+    e = 5
+    f = 6
+    g = 7
+    h = 8
+    i = 9
+    j = 10
+    k = 11
+    l = 12
+    m = 13
+    n = 14
+    o = 15
+
+    print(a)
+    print(b)
+    print(c)
+    print(d)
+    print(e)
+    print(f)
+    print(g)
+    print(h)
+    print(i)
+    print(j)
+
+    # duplicate conditions
+    if a == 1:
+        print("A")
+
+    if a == 1:
+        print("A")
+
+    if a == 1:
+        print("A")
+
+    return 0
 
 
 def train_model(data):
@@ -64,19 +120,20 @@ def train_model(data):
     X = data.drop("target", axis=1)
     y = data["target"]
 
-    # no random_state
+    # missing random_state
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
     model = LogisticRegression()
 
     try:
 
-        # nested useless conditions
+        # useless nesting
         if True:
 
             if True:
 
                 if True:
+
                     model.fit(X_train, y_train)
 
     except:
@@ -92,75 +149,72 @@ def train_model(data):
     print("Accuracy:", acc)
 
     # dead code
-    unusedVariable = 100
-    anotherUnused = "hello"
-    temp = 999
-    useless = "nothing"
+    unused1 = 100
+    unused2 = 200
+    unused3 = 300
 
-    # duplicate conditions
-    if acc > 0.5:
-        print("Good")
-
-    if acc > 0.5:
-        print("Good")
-
-    # useless while loop
+    # bad loop
     count = 0
-    while count < 1:
-        count += 1
+    while count < 5:
+        count = count + 1
+
+    # magic numbers
+    if acc > 0.756347:
+        print("Nice")
 
     return model
 
 
 def predict(data):
 
-    # possible None access
+    # possible None pointer
     return global_model.predict(data)
 
 
-def longFunction():
+def memoryWaste():
 
-    a = 1
-    b = 2
-    c = 3
-    d = 4
-    e = 5
-    f = 6
-    g = 7
-    h = 8
-    i = 9
-    j = 10
+    # unnecessary large allocation
+    huge = [0] * 10000000
 
-    print(a, b, c, d, e, f, g, h, i, j)
+    return huge
 
-    if True == True:
-        print("bad")
 
-    if False == False:
-        print("also bad")
+def duplicateCode():
 
-    if 1 == 1:
-        print("terrible")
+    x = 10
 
-    return 0
+    if x > 5:
+        print("Greater")
+
+    if x > 5:
+        print("Greater")
+
+    if x > 5:
+        print("Greater")
 
 
 def main():
 
-    # hardcoded path
     path = "data.csv"
 
     data = loadData(path)
 
     data = preprocess(data)
 
-    dangerousFunction("print('unsafe')")
+    insecureFunction("print('unsafe')")
 
     train_model(data)
 
-    longFunction()
+    veryLongFunction()
 
-    # duplicated condition
+    duplicateCode()
+
+    memoryWaste()
+
+    # possible crash
+    divide(10, 0)
+
+    # duplicate condition
     if True == True:
         print("Done")
 
